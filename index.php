@@ -1,7 +1,67 @@
 <?php
 $is_auth = rand(0, 1);
 
-$user_name = ''; // укажите здесь ваше имя
+$user_name = 'Анна'; // укажите здесь ваше имя
+
+$category_list = [
+    "boards" => "Доски и Лыжи",
+    "bindings" => "Крепления",
+    "boots" => "Ботинки",
+    "clothes" => "Одежда",
+    "instruments" => "Инструменты",
+    "other" => "Разное",
+];
+
+$name_list =
+[
+ [
+    "name" => "2014 Rossignol District Snowboard",
+    "category" => "boards",
+    "price" => 10999,
+    "image" => "img/lot-1.jpg"],
+    [
+        "name" => "DC Ply Mens 2016/2017 Snowboard",
+        "category" => "boards",
+        "price" => 159999,
+        "image" => "img/lot-2.jpg",],
+    [
+        "name" => "Крепления Union Contact Pro 2015 года размер L/XL",
+        "category" => "bindings",
+        "price" => 8000,
+        "image" => "img/lot-3.jpg",],
+    [
+        "name" => "Ботинки для сноуборда DC Mutiny Charocal",
+        "category" => "boots",
+        "price" => 10999,
+        "image" => "img/lot-4.jpg",],
+    [
+        "name" => "Куртка для сноуборда DC Mutiny Charocal",
+        "category" => "clothes",
+        "price" => 7500,
+        "image" => "img/lot-5.jpg",],
+    [
+        "name" => "Маска Oakley Canopy",
+        "category" => "other",
+        "price" => 5400,
+        "image" => "img/lot-6.jpg",]
+];
+function sum($number, $Rubl){
+    $number = ceil($number);
+
+    if ($number >=1000){
+        $price = number_format($number, 0,'.', ' ');
+    }
+    else{
+        $price = $number;
+    }
+    if ($Rubl){
+        return $price."<b class=\"rub\">p</b>";
+    }
+    else{
+        return $price;
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -10,61 +70,6 @@ $user_name = ''; // укажите здесь ваше имя
     <title>Главная</title>
     <link href="../css/normalize.min.css" rel="stylesheet">
     <link href="../css/style.css" rel="stylesheet">
-
-    <?php
-    $array = [
-
-        "Boards" => "Доски и лыжи",
-        "Fasteners" => "Крепления",
-        "Boots"=> "Ботинки",
-        "Clothing" => "Одежда",
-        "instruments" => "Инструменты",
-        "Others" => "Разное",
-    ];
-
-    $array = [
-        [
-             "name" => "2014 Rossignol District Snowboard ",
-             "Category" => "Boards",
-             "Price" => 10999,
-             "Picture" => "img/lot-1.jpg"
-        ];
-
-           [
-               "name" => "DC Ply Mens 2016/2017 Snowboard",
-               "Category" => "Boards",
-               "Price" => 159999,
-               "Picture" => "img/lot-2.jpg"
-           ];
-
-              [
-                  "name" => "Крепления Union Contact Pro 2015 года размер L/XL",
-                  "Category" => "Fasteners",
-                  "Price" => 8000,
-                  "Picture" => "img/lot-3.jpg"
-              ];
-
-                 [
-                     "name" => "Ботинки для сноуборда DC Mutiny Charocal",
-                     "Category" => "Boots",
-                     "Price" => 10999,
-                     "Picture" => "img/lot-4.jpg"
-                 ];
-
-                    [
-                        "name" => "Куртка для сноуборда DC Mutiny Charocal",
-                        "Category" => "Clothing",
-                        "Price" => 7500,
-                        "Picture" => "img/lot-5.jpg"
-                    ];
- 
-                       [
-                           "name" => "Маска Oakley Canopy",
-                           "Category" => "Others",
-                           "Price" => 5400,
-                           "Picture" => "img/lot-6.jpg"
-                       ];
-    ];
 
 </head>
 <body>
@@ -84,8 +89,24 @@ $user_name = ''; // укажите здесь ваше имя
 
         <nav class="user-menu">
 
-        <!-- здесь должен быть PHP код для показа меню и данных пользователя -->
+        <?php if ($is_auth == 1): ?>
+          <div class="user-menu__image">
+            <img src="img/1.jpg" width="50" height="50" alt="Пользователь">
+          </div>
+          <div class="user-menu__logged">
+            <p><?=$user_name?></p>
+          </div>
 
+        <?php elseif($is_auth == 0): ?>
+          <ul class="user-menu__list">
+            <li class="user-menu__item">
+              <a href="#">Регистрация</a>
+            </li>
+            <li class="user-menu__item">
+              <a href="#">Вход</a>
+            </li>
+          </ul>
+        <?php endif; ?>
         </nav>
     </div>
 </header>
@@ -95,36 +116,38 @@ $user_name = ''; // укажите здесь ваше имя
         <h2 class="promo__title">Нужен стафф для катки?</h2>
         <p class="promo__text">На нашем интернет-аукционе ты найдёшь самое эксклюзивное сноубордическое и горнолыжное снаряжение.</p>
         <ul class="promo__list">
-            <!--заполните этот список из массива категорий-->
-            <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html">Имя категории</a>
-            </li>
+            <?php foreach ($category_list as $key => $value):?>
+                <!--заполните этот список из массива категорий-->
+                <li class="promo__item promo__item--boards">
+                    <a class="promo__link" href="pages/all-lots.html"><?php print $value ?></a>
+                </li>
+            <? endforeach; ?>
         </ul>
     </section>
     <section class="lots">
         <div class="lots__header">
             <h2>Открытые лоты</h2>
         </div>
-        <ul class="lots__list">
+        <ul class="lots__list"><?php foreach ($name_list as $k => $val) : ?>
             <!--заполните этот список из массива с товарами-->
             <li class="lots__item lot">
                 <div class="lot__image">
-                    <img src="" width="350" height="260" alt="">
+                    <img src="img/lot-<?=($k + 1)?>.jpg" width="350" height="260" alt="<?=$val['name']?>">
                 </div>
                 <div class="lot__info">
-                    <span class="lot__category">Название категории</span>
-                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html">Название товара</a></h3>
+                    <span class="lot__category"><?=$category_list[$val['category']]?></span>
+                    <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?=$val['name']?></a></h3>
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost">цена<b class="rub">р</b></span>
+                            <span class="lot__cost"><?=sum($val['price'],true)?></span>
                         </div>
                         <div class="lot__timer timer">
                             12:23
                         </div>
                     </div>
                 </div>
-            </li>
+            </li><?php endforeach; ?>
         </ul>
     </section>
 </main>
@@ -133,10 +156,12 @@ $user_name = ''; // укажите здесь ваше имя
 <footer class="main-footer">
     <nav class="nav">
         <ul class="nav__list container">
-            <!--заполните этот список из массива категорий-->
-            <li class="nav__item">
-                <a href="pages/all-lots.html">Название категории</a>
-            </li>
+            <?php foreach ($category_list as $key => $value): ?>
+                <!--заполните этот список из массива категорий-->
+                <li class="nav__item">
+                    <a href="pages/all-lots.html"><?php print $value ?></a>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
