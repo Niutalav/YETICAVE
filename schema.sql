@@ -61,8 +61,8 @@ ALTER TABLE lots
     ADD CONSTRAINT lots_1 FOREIGN KEY (user_id) REFERENCES users (id),
     ADD CONSTRAINT lots_2 FOREIGN KEY (category_id) REFERENCES categories (id),
     ADD CONSTRAINT lots_3 FOREIGN KEY (winner_id) REFERENCES users (id);
-COMMIT;
 
 ALTER TABLE bets
     ADD CONSTRAINT bets_1 FOREIGN KEY (user_id) REFERENCES users (id),
     ADD CONSTRAINT bets_2 FOREIGN KEY (lot_id) REFERENCES lots (id);
+COMMIT;
