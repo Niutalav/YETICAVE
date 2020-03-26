@@ -3,25 +3,18 @@
 $is_auth = rand(0, 1);
 
 $time_now = strtotime("now");
-echo strtotime("now"), "\n";
 
 $time_tomorrow = strtotime("tomorrow");
-echo strtotime("tomorrow"), "\n";
 
 $time_difference = $time_tomorrow - $time_now;
-echo $time_difference, "\n";
 
 $time_number = floor($time_difference / 3600);
-echo $time_number, "\n";
 
 $time_to = $time_difference - $time_number * 3600;
-echo $time_to, "\n";
 
 $time_min = floor($time_to / 60);
-echo $time_min, "\n";
 
 $time_time = sprintf('%02d:%02d', $time_number, $time_min);
-echo $time_time, "\n";
 
 $user_name = 'Анна'; // укажите здесь ваше имя
 $categories_list = [
