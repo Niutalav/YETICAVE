@@ -29,7 +29,7 @@ INSERT INTO users SET id = 5, registration_date = '2019-02-17 08:02:42', email =
 INSERT INTO users SET id = 6, registration_date = '2019-05-02 14:26:27', email = 'semyon@mail.ru', username = 'Semyon', password = 'hjk379', avatar = 'img/lot-2.jpg', contacts = '10293';
 
 -- 1. Получить все категории
-Select * from categories
+Select title from categories
 
 -- 2. Получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену последней ставки, количество ставок, название категории;
 Select * from lots where completion_date > CURRENT_DATE;
